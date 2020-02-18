@@ -21,8 +21,6 @@ import com.shlsoft.matches.utils.Utils;
 public class MainActivity extends FragmentActivity {
 
 	private ImageView mBackgroundImage;
-	//AdMob ads
-	InterstitialAd mInterstitialAd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +32,6 @@ public class MainActivity extends FragmentActivity {
 
 		setContentView(R.layout.activity_main);
 		mBackgroundImage = (ImageView) findViewById(R.id.background_image);
-
-		showAd();
 
 		Shared.activity = this;
 		Shared.engine.start();
@@ -74,19 +70,4 @@ public class MainActivity extends FragmentActivity {
 		bitmap = Utils.downscaleBitmap(bitmap, 2);
 		mBackgroundImage.setImageBitmap(bitmap);
 	}
-
-	public void showAd(){
-		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId("ca-app-pub-2026382780923969/2954731902");
-		mInterstitialAd.loadAd(new AdRequest.Builder().build());
-		mInterstitialAd.setAdListener(new AdListener() {
-			@Override
-			public void onAdLoaded() {
-				if(mInterstitialAd.isLoaded()){
-					mInterstitialAd.show();
-				}
-			}
-		});
-	}
-
 }

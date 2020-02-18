@@ -8,8 +8,8 @@ android {
         applicationId "com.shlsoft.matches"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 1007
-        versionName "1.01.001007"
+        versionCode 1
+        versionName "1.1.0"
     }
     buildTypes {
         release {

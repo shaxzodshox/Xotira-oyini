@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.shlsoft.matches.R;
 import com.shlsoft.matches.common.Memory;
 import com.shlsoft.matches.common.Shared;
@@ -22,8 +25,15 @@ import com.shlsoft.matches.ui.DifficultyView;
 
 public class DifficultySelectFragment extends Fragment {
 
+
+    //AdMob ads
+    InterstitialAd mInterstitialAd;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        showAd();//show Interstitial advertisement of AdMob
+
         View view = LayoutInflater.from(Shared.context).inflate(R.layout.difficulty_select_fragment, container, false);
         Theme theme = Shared.engine.getSelectedTheme();
 
@@ -125,5 +135,18 @@ public class DifficultySelectFragment extends Fragment {
         });
     }
 
+    private void showAd() {
+        mInterstitialAd = new InterstitialAd(getActivity());
+        mInterstitialAd.setAdUnitId("ca-app-pub-2026382780923969/2954731902");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        });
+    }
 
 }
